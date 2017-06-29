@@ -1,0 +1,10 @@
+encoding "utf8";
+
+import "base.proto";
+import "articles_base.proto";
+import "fact_types.proto";
+
+TAuxDicArticle "Адрес"
+{
+	key = {"tomita:address.cxx" type=CUSTOM}	
+}
