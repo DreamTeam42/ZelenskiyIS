@@ -7,4 +7,5 @@ message Address: NFactType.TFact
 	required string Street = 2;
 	optional string House = 3;
 	optional string Flat = 4;
+	optional string Price = 5;
 }

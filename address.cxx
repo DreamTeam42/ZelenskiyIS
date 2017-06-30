@@ -2,6 +2,7 @@
 
 StreetW -> 'проспект' | 'проезд' | 'улица' | 'шоссе';
 StreetSokr -> 'пр' | 'просп' | 'пр-т' | 'пр-д' | 'ул' | 'ш';
+StreetIm -> 'они'<gram="дат">|'имени';
 
 StreetDescr -> StreetW | StreetSokr;
 
@@ -17,17 +18,31 @@ NumberW -> NumberW_1 | NumberW_2 | NumberW_3 | NumberW_4;
 StreetNameAdj -> Adj<h-reg1> Adj*;
 StreetNameAdj -> NumberW<gnc-agr[1]> Adj<gnc-agr[1]> (Word<gram="род">);
 
-Street -> (StreetDescr) StreetNameNoun<gram="род",h-reg1>;
+Street -> (StreetDescr) (StreetIm) StreetNameNoun<gram="род",h-reg1>;
 Street -> (StreetDescr) StreetNameNoun<gram="им",h-reg1>;
 Street -> StreetNameAdj<gnc-agr[1]> StreetW<gnc-agr[1]>;
 Street -> StreetNameAdj StreetSokr;
 Street -> StreetSokr StreetNameAdj;
 Street -> StreetW<gnc-agr[1]> StreetNameAdj<gnc-agr[1]>;
 
-CityW -> 'город'|'г'|'гор';
-City -> (CityW) Word<rt>;
+//CityW -> 'город'|'г'|'гор';
+//City -> (CityW) Word<rt>;
 
 HouseW -> 'д'|'дом';
 House -> (HouseW) AnyWord<wff=/[1-9]?[0-9]?[0-9]?/>;
 
-Address -> (City interp (Address.City)) (',') Street interp (Address.Street) (',') House interp (Address.House);
+Address ->  Street interp (Address.Street::not_norm) (',') House interp (Address.House);
+
+//(City interp (Address.City)) (',')
+
+Factor -> 'т'|'тыс'|'тысяч'|'миллионов'|'млн';
+Currency -> 'рубль'<gram="род">|'р'|'руб';
+Value -> Money MoneyW;
+Money -> AnyWord<wff=/[1-9]?[0-9]*/>;
+MoneyW -> (Factor) Currency;
+PriceW -> 'Цена'|'Стоимость'|'ЦЕНА'|'цена'|'СТОИМОСТЬ'|'стоимость';
+
+Price -> (PriceW) Value interp (Address.Price);
+
+Post -> Address AnyWord* Price;
+Post -> Price AnyWord* Address;
