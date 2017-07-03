@@ -3,16 +3,20 @@ encoding "utf8";
 TTextMinerConfig {
 	Dictionary = "dic.gzt"
 	
-	Input = {File = "input.txt"}
+	Input = {File = "monoinput.txt"}
 
 	Output = {File = "output.txt" Format = text}
 
 	Articles = [
 		{Name = "Адрес"}
+		{Name = "Цена"}
+		{Name = "Площадь"}
 	]
 
 	Facts = [
 		{Name = "Address"}
+		{Name = "Price"}
+		{Name = "Square"}
 	]
 
 	PrettyOutput = "pretty.html"

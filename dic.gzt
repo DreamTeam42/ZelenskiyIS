@@ -8,3 +8,13 @@ TAuxDicArticle "Адрес"
 {
 	key = {"tomita:address.cxx" type=CUSTOM}	
 }
+
+TAuxDicArticle "Цена"
+{
+	key = {"tomita:price.cxx" type=CUSTOM}
+}
+
+TAuxDicArticle "Площадь"
+{
+	key = {"tomita:square.cxx" type=CUSTOM}
+}

@@ -3,9 +3,16 @@ import "facttypes_base.proto";
 
 message Address: NFactType.TFact
 {
-	optional string City = 1;
-	required string Street = 2;
-	optional string House = 3;
-	optional string Flat = 4;
-	optional string Price = 5;
+	optional string Street = 1;
+	optional string House = 2;
+}
+
+message Price: NFactType.TFact
+{
+	optional string Price = 1;	
+}
+
+message Square: NFactType.TFact
+{
+	optional string Square = 1;
 }
