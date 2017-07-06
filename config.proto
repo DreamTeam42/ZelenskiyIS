@@ -8,15 +8,21 @@ TTextMinerConfig {
 	Output = {File = "output.txt" Format = text}
 
 	Articles = [
+		{Name = "Комнаты"}
 		{Name = "Адрес"}
 		{Name = "Цена"}
 		{Name = "Площадь"}
+		{Name = "Контакты"}
+		{Name = "Район"}
 	]
 
 	Facts = [
+		{Name = "Rooms"}
 		{Name = "Address"}
 		{Name = "Price"}
 		{Name = "Square"}
+		{Name = "Contacts"}
+		{Name = "Area"}
 	]
 
 	PrettyOutput = "pretty.html"

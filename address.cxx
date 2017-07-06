@@ -20,12 +20,12 @@ NumberW -> NumberW_1 | NumberW_2 | NumberW_3 | NumberW_4;
 StreetNameAdj -> Adj<h-reg1> Adj*;
 StreetNameAdj -> NumberW<gnc-agr[1]> Adj<gnc-agr[1]> (Word<gram="род">);
 
-Street -> (StreetDescr <cut>) (StreetIm) StreetNameNoun<gram="род",h-reg1>;
-Street -> (StreetDescr <cut>) StreetNameNoun<gram="им",h-reg1>;
-Street -> StreetNameAdj<gnc-agr[1]> StreetW<gnc-agr[1],cut>;
-Street -> StreetNameAdj StreetSokr<cut>;
-Street -> StreetSokr<cut> StreetNameAdj;
-Street -> StreetW<gnc-agr[1],cut> StreetNameAdj<gnc-agr[1]>;
+Street -> (StreetDescr) (StreetIm) StreetNameNoun<gram="род",h-reg1>;
+Street -> (StreetDescr) StreetNameNoun<gram="им",h-reg1>;
+Street -> StreetNameAdj<gnc-agr[1]> StreetW<gnc-agr[1]>;
+Street -> StreetNameAdj StreetSokr;
+Street -> StreetSokr (StreetIm) StreetNameAdj;
+Street -> StreetW<gnc-agr[1]> (StreetIm) StreetNameAdj<gnc-agr[1]>;
 
 Factor -> 'т'|'тыс'|'тысяч'|'миллионов'|'млн';
 Currency -> 'рубль'<gram="род">|'р'|'руб';
@@ -38,9 +38,10 @@ Price -> PriceW Value;
 //CityW -> 'город'|'г'|'гор';
 //City -> (CityW) Word<rt>;
 //(City interp (Address.City)) (',')
-
+KorpW -> 'корпус'|'корп'|'к'|'Корпус';
+Korpus -> KorpW<cut> AnyWord<wff=/[1-9]+/>;
 HouseW -> 'д'|'дом';
-House -> (HouseW <cut>) AnyWord<wff=/[1-9]?[0-9]?[0-9]?/> (Litera);
+House -> (HouseW <cut>) AnyWord<wff=/[1-9]?[0-9]?[0-9]?/> (Litera) (Korpus interp (Address.Korpus));
 Litera -> AnyWord<wff=/[а-яА-Я]/>;
 
 Address -> Street interp (Address.Street::not_norm) (',') House interp (Address.House);

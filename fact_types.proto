@@ -5,6 +5,7 @@ message Address: NFactType.TFact
 {
 	optional string Street = 1;
 	optional string House = 2;
+	optional string Korpus = 3;
 }
 
 message Price: NFactType.TFact
@@ -15,4 +16,19 @@ message Price: NFactType.TFact
 message Square: NFactType.TFact
 {
 	optional string Square = 1;
+}
+
+message Rooms: NFactType.TFact
+{
+	optional string Rooms = 1;
+}
+
+message Contacts: NFactType.TFact
+{
+	optional string Phone = 1;
+}
+
+message Area: NFactType.TFact
+{
+	optional string Area = 1;
 }
