@@ -5,7 +5,7 @@ TTextMinerConfig {
 	
 	Input = {File = "monoinput.txt"}
 
-	Output = {File = "output.txt" Format = text}
+	Output = {File = "output.xml"}
 
 	Articles = [
 		{Name = "Комнаты"}
@@ -22,7 +22,7 @@ TTextMinerConfig {
 		{Name = "Price"}
 		{Name = "Square"}
 		{Name = "Contacts"}
-		{Name = "Area"}
+		{Name = "District"}
 	]
 
 	PrettyOutput = "pretty.html"

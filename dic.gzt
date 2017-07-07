@@ -4,7 +4,7 @@ import "base.proto";
 import "articles_base.proto";
 import "fact_types.proto";
 import "kwtypes.proto";
-import "area.gzt";
+import "district.gzt";
 
 TAuxDicArticle "Адрес"
 {
@@ -33,5 +33,5 @@ TAuxDicArticle "Контакты"
 
 TAuxDicArticle "Район"
 {
-	key = {"tomita:area.cxx" type=CUSTOM}
+	key = {"tomita:district.cxx" type=CUSTOM}
 }

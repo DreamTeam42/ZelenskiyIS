@@ -28,7 +28,7 @@ message Contacts: NFactType.TFact
 	optional string Phone = 1;
 }
 
-message Area: NFactType.TFact
+message District: NFactType.TFact
 {
-	optional string Area = 1;
+	optional string District = 1;
 }
