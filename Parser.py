@@ -34,26 +34,28 @@ def xml_parse():
         result.rooms_count = rooms_parse(tree.find('./Rooms/Rooms').attrib.get('val'))
     return result
 
+#Возвращает численное значение цены
 def price_parse(val):
     #print (val)
-    if re.search(r'Т|т|К|к',val) is not None:
-        split_list = re.split(r'Т|т|К|к',val)
-        price = int(split_list[0])*1000
-    elif re.search(r'млн|МЛН',val) is not None:
-        split_list = re.split(r'млн|МЛН',val)
-        price = int(split_list[0])*1000000
-    else:
+    if re.search(r'Т|т|К|к',val) is not None: #Если в строке есть "т", "тыс" или "к"
+        split_list = re.split(r'Т|т|К|к',val) #Получаем число, указанное до этого
+        price = int(split_list[0])*1000 #Умножаем его на 1000
+    elif re.search(r'млн|МЛН',val) is not None: #Иначе если в строке есть "млн"
+        split_list = re.split(r'млн|МЛН',val) #Получаем число, указанное до этого
+        price = int(split_list[0])*1000000 #Умножаем его на 1000000
+    else: #Иначе получаем число, идущее в строке до любого из указанных дескрипторов валюты
         split_list = re.split(r'р|Р|руб|РУБ|Руб|рублей|Рублей|РУБЛЕЙ', val)
         price = int(split_list[0])
-    return price
+    return price #Возвращаем полученное число
 
+#Возвращает численное значение количества комнат
 def rooms_parse(val):
     #print (val)
-    match_res = re.match(r'\d+',val)
-    if match_res is not None:
+    match_res = re.match(r'\d+',val) #Проверяем, есть ли в начале строки цифра
+    if match_res is not None: #Если есть, принимаем ее за количество комнат
         rooms_count = int(match_res.group(0))
-    elif re.match(r'ОДН',val) is not None:
-        rooms_count = 1
+    elif re.match(r'ОДН',val) is not None: #Иначе проверяем строку на все возможные буквенные обозначения количества комнат
+        rooms_count = 1 #Получаем соответствующее число
     elif re.match(r'ДВУ',val) is not None:
         rooms_count = 2
     elif re.match(r'ТРЕ|ТРЁ', val) is not None:
@@ -62,7 +64,7 @@ def rooms_parse(val):
         rooms_count = 4
     elif re.match(r'ПЯТ', val) is not None:
         rooms_count = 5
-    return rooms_count
+    return rooms_count #Возвращаем полученное число
 
 
 print(post_parse().square)
