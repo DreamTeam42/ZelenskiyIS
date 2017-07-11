@@ -18,29 +18,33 @@ def post_parse():
     return result
 
 def xml_parse():
-    result = Advertisement()
-
-    tree = ET.parse('output.xml').getroot()[0][0]
-    if tree.find('Address') is not None:
-        result.street = tree.find('./Address/Street').attrib.get('val')
-        result.house_number = tree.find('./Address/House').attrib.get('val')
-    if tree.find('Square') is not None:
-        result.square = int(re.match(r'\d+',tree.find('./Square/Square').attrib.get('val')).group(0))
-    if tree.find('District') is not None:
-        result.district = tree.find('./District/District').attrib.get('val')
-    if tree.find('Price') is not None:
-        result.price = price_parse(tree.find('./Price/Price').attrib.get('val'))
-    if tree.find('Rooms') is not None:
-        result.rooms_count = rooms_parse(tree.find('./Rooms/Rooms').attrib.get('val'))
+    tree = ET.parse('output.xml').getroot()
+    result = []
+    print (tree)
+    for document in tree.findall('document/facts'):
+        print (document)
+        post = Advertisement()
+        if document.find('Address') is not None:
+            post.street = document.find('./Address/Street').attrib.get('val')
+            post.house_number = document.find('./Address/House').attrib.get('val')
+        if document.find('Square') is not None:
+            post.square = int(re.match(r'\d+',document.find('./Square/Square').attrib.get('val')).group(0))
+        if document.find('District') is not None:
+            post.district = document.find('./District/District').attrib.get('val')
+        if document.find('Price') is not None:
+            post.price = price_parse(document.find('./Price/Price').attrib.get('val'))
+        if document.find('Rooms') is not None:
+            post.rooms_count = rooms_parse(document.find('./Rooms/Rooms').attrib.get('val'))
+        result.append(post)
     return result
 
 #Возвращает численное значение цены
 def price_parse(val):
     #print (val)
     if re.search(r'Т|т|К|к',val) is not None: #Если в строке есть "т", "тыс" или "к"
-        split_list = re.split(r'Т|т|К|к',val) #Получаем число, указанное до этого
-        price = int(split_list[0])*1000 #Умножаем его на 1000
-    elif re.search(r'млн|МЛН',val) is not None: #Иначе если в строке есть "млн"
+        split_list = re.split(r' ?Т|т|К|к',val) #Получаем число, указанное до этого
+        price = float(split_list[0].replace(r',',r'.'))*1000 #Умножаем его на 1000
+    elif re.search(r' ?млн|МЛН',val) is not None: #Иначе если в строке есть "млн"
         split_list = re.split(r'млн|МЛН',val) #Получаем число, указанное до этого
         price = int(split_list[0])*1000000 #Умножаем его на 1000000
     else: #Иначе получаем число, идущее в строке до любого из указанных дескрипторов валюты
@@ -66,5 +70,5 @@ def rooms_parse(val):
         rooms_count = 5
     return rooms_count #Возвращаем полученное число
 
-
-print(post_parse().square)
+print(post_parse()[0].price)
+print(post_parse()[1].price)

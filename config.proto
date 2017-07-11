@@ -3,7 +3,7 @@ encoding "utf8";
 TTextMinerConfig {
 	Dictionary = "dic.gzt"
 	
-	Input = {File = "monoinput.txt"}
+	Input = {Dir = "./Input"}
 
 	Output = {File = "output.xml"}
 
